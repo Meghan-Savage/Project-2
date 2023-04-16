@@ -4,7 +4,7 @@ const Banner = () => {
   return (
     <img
       className="w-full h-full object-cover"
-      src="../../public/image 3.png"
+      src="/image 3.png"
       alt="Hero banner of products"
     />
   );
