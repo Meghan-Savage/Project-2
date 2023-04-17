@@ -1,3 +1,5 @@
+import Product from "../../src/model/product.js";
+
 export const displayProducts = (req, res) => {
   const title = "Egg Plant";
   const price = "12.99";
@@ -7,11 +9,21 @@ export const displayProducts = (req, res) => {
 };
 
 export const addProduct = (req, res) => {
-  const id = req.body.id;
-  const title = req.body.title;
-  const imageUrl = req.body.imageUrl;
-  const price = req.body.price;
-  const description = req.body.description;
+  console.log("req.body", req.body);
+
+  const title = req.body.productName;
+  const imageUrl = req.body.productImgUrl;
+  const price = req.body.productPrice;
+  const description = req.body.productDescription;
+
+  const product = new Product({
+    productName: title,
+    productPrice: price,
+    productDescription: description,
+    productImgUrl: imageUrl,
+  });
+
+  product.save();
 
   // function to save data to backend
   //   This should have a form attached to it

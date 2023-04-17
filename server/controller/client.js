@@ -1,13 +1,20 @@
+import Product from "../../src/model/product.js";
+
 export const displayProducts = (req, res) => {
-    // if the function also deals with a store id this can be used thrice
-  res.send("<h1>product list</h1>");
-}
+  try {
+    const products = Product.find();
+    console.log(products);
+    res.status(400).send("products");
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+};
 
 export const clientProfile = (req, res) => {
   res.send("<h1>client profile</h1>");
-}
+};
 
 export const createClientProfile = (req, res) => {
   res.send("<h1>create client profile</h1>");
-}
-
+};

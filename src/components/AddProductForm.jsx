@@ -3,13 +3,14 @@ import BlockInput from "../util/BlockInput";
 
 const AddProductForm = () => {
   return (
-    <form action="/admin/add-product" method="POST">
+    <form action="http://localhost:3000/admin/add-product" method="POST">
       <BlockInput type="text" placeholder="Product Name" name="productName" />
       <BlockInput
         type="number"
         placeholder="Price of Product"
         min="0"
-        max="10"
+        max="1000"
+        step=".01"
         name="productPrice"
       />
       <BlockInput
