@@ -26,7 +26,7 @@ const ProductList = () => {
       in an array of productListData */}
       {productListData.map((product) => {
         return (
-          <div key={product._id}>
+          <div key={product._id} className="m-4 w-60">
             <div className="h-60">
               <img src={product.productImgUrl} alt="product image" />
             </div>
@@ -34,6 +34,20 @@ const ProductList = () => {
               <h1> {product.productName} </h1>
               <p>{product.productDescription}</p>
               <p>${product.productPrice}</p>
+            </div>
+            <div>
+              <button
+                className="w-full m-2 text-white bg-lime-500 hover:bg-lime-600 block"
+                type="submit"
+              >
+                Add To Cart
+              </button>
+              <button
+                className="w-full m-2 text-white bg-lime-500 hover:bg-lime-600 block"
+                type="submit"
+              >
+                Add To Favorites
+              </button>
             </div>
           </div>
         );

@@ -3,7 +3,6 @@ import Product from "../../src/model/product.js";
 export const displayProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    console.log(products);
     res.send(products);
   } catch (error) {
     console.error(error.message);
