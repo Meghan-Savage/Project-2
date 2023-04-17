@@ -19,10 +19,21 @@ const ProductList = () => {
   console.log(productListData);
 
   return (
-    <main>
+    <main className="flex flex-row">
       {productListData.map((product) => {
         console.log(product);
-        return <div key={product._id}>{product.productName}</div>;
+        return (
+          <div key={product._id}>
+            <div className="h-60">
+              <img src={product.productImgUrl} alt="product image" />
+            </div>
+            <div>
+              <h1> {product.productName} </h1>
+              <p>{product.productDescription}</p>
+              <p>${product.productPrice}</p>
+            </div>
+          </div>
+        );
       })}
     </main>
   );

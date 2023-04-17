@@ -9,16 +9,12 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors);
-// Parses 'body' content to be handled by your server
+app.use(cors());
+// // Parses 'body' content to be handled by your server
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.send("hi");
-});
-
-// app.use(clientRouter);
+app.use(clientRouter);
 app.use("/admin", adminRouter);
 
 try {

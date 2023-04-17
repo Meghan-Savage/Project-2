@@ -1,10 +1,10 @@
 import Product from "../../src/model/product.js";
 
-export const displayProducts = (req, res) => {
+export const displayProducts = async (req, res) => {
   try {
-    const products = Product.find();
+    const products = await Product.find();
     console.log(products);
-    res.status(400).send("products");
+    res.send(products);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal Server Error");
