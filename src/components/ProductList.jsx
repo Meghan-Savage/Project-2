@@ -4,6 +4,10 @@ import axios from "axios";
 const ProductList = () => {
   const [productListData, setProductListData] = useState([]);
 
+  /* This useEffect hook fetches data from a server and 
+  sets it in the state variable called productListData. 
+  It runs once, immediately after the component mounts, 
+  due to the empty array as a second argument */
   useEffect(() => {
     async function fetchData() {
       try {
@@ -16,12 +20,11 @@ const ProductList = () => {
     fetchData();
   }, []);
 
-  console.log(productListData);
-
   return (
     <main className="flex flex-row">
+      {/* Map function to iterate through each product 
+      in an array of productListData */}
       {productListData.map((product) => {
-        console.log(product);
         return (
           <div key={product._id}>
             <div className="h-60">
