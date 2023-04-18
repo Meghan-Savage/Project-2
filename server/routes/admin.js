@@ -7,6 +7,7 @@ import {
   deleteProduct,
   patchProduct,
   addProduct,
+  getProduct,
 } from "../controller/admin.js";
 
 const adminRouter = express.Router();
@@ -21,5 +22,7 @@ adminRouter.post("/add-product", addProduct);
 
 // data logic stored for access from react router
 adminRouter.get("/add-product", displayProducts);
+
+adminRouter.get("/get-product/:id", getProduct);
 
 export default adminRouter;

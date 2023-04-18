@@ -1,4 +1,5 @@
 import Product from "../../src/model/product.js";
+import { getProductFromId } from "../../src/util/get-product-by-id.js";
 
 export const displayProducts = (req, res) => {
   const title = "Egg Plant";
@@ -6,6 +7,16 @@ export const displayProducts = (req, res) => {
 
   res.status(400).send(`<h1> ${title} </h1> <p> ${price} </p>`);
   //   this should display all products
+};
+
+export const getProduct = async (req, res) => {
+  const productId = req.params.id;
+  console.log(productId);
+
+  const results = await getProductFromId(productId);
+  console.log(results);
+
+  res.send(results);
 };
 
 export const addProduct = (req, res) => {
