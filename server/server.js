@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import adminRouter from "./routes/admin.js";
 import clientRouter from "./routes/client.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -11,11 +12,14 @@ const app = express();
 
 app.use(cors());
 // // Parses 'body' content to be handled by your server
+pp.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(clientRouter);
 app.use("/admin", adminRouter);
+app.use("/auth", authRoute);
+app.use("/users", userRoute);
 
 try {
   await mongoose.connect(
