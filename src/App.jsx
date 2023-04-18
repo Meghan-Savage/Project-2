@@ -8,6 +8,7 @@ import CreateProductPage from "./pages/CreateProductPage";
 import ProductList from "./components/ProductList";
 import EditProductPage from "./pages/EditProductPage";
 import LoginPage from "./pages/LoginPage";
+import CreateAccountPage from "./pages/CreateAccountPage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/products" element={<ProductList />} />
         <Route path="/productId/:id" element={<EditProductPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/create-account" element={<CreateAccountPage />} />
       </Routes>
     </>
   );

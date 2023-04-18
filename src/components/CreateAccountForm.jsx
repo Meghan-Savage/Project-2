@@ -1,25 +1,27 @@
 import React from "react";
 import BlockInput from "../util/BlockInput";
 
-const LoginInForm = () => {
+const CreateAccountForm = () => {
   return (
     <form action="" method="POST">
-      <p>access your account</p>
+      <p>create your account</p>
       <div>
         <BlockInput type="text" placeholder="USERNAME" name="username" />
+        <BlockInput type="email" placeholder="EMAIL" name="email" />
+        <BlockInput type="tel" placeholder="PHONE NUMBER" name="phoneNumber" />
+        <BlockInput type="text" placeholder="STORE" name="store" />
         <BlockInput type="password" placeholder="PASSWORD" name="password" />
       </div>
       <div>
-        <button>forgot your password?</button>
         <button
           className="w-64 m-6 text-white bg-lime-500 hover:bg-lime-600 block"
           type="submit"
         >
-          SIGN IN
+          CREATE ACCOUNT
         </button>
       </div>
     </form>
   );
 };
 
-export default LoginInForm;
+export default CreateAccountForm;
