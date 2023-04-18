@@ -33,3 +33,6 @@ MongoDB database. This model can be used to interact
 with the database and perform CRUD (create, read, update, delete) 
 operations on product data. */
 export default mongoose.model("Product", productSchema, "products");
+
+
+

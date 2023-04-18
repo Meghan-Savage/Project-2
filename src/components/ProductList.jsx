@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import axios from "axios";
 
 const ProductList = () => {
   const [productListData, setProductListData] = useState([]);
+  const navigate = useNavigate();
 
   /* This useEffect hook fetches data from a server and 
   sets it in the state variable called productListData. 
@@ -20,8 +22,12 @@ const ProductList = () => {
     fetchData();
   }, []);
 
+  function selectedProduct(productId) {
+    navigate("/productId/" + productId);
+  }
+
   return (
-    <main className="flex flex-row">
+    <div className="flex flex-row">
       {/* Map function to iterate through each product 
       in an array of productListData */}
       {productListData.map((product) => {
@@ -48,11 +54,20 @@ const ProductList = () => {
               >
                 Add To Favorites
               </button>
+              <button
+                className="w-full m-2 text-white bg-lime-500 hover:bg-lime-600 block"
+                type="button"
+                onClick={() => {
+                  return selectedProduct(product._id);
+                }}
+              >
+                Edit
+              </button>
             </div>
           </div>
         );
       })}
-    </main>
+    </div>
   );
 };
 
