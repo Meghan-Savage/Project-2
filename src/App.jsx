@@ -7,6 +7,7 @@ import LandingPage from "./pages/LandingPage";
 import CreateProductPage from "./pages/CreateProductPage";
 import ProductList from "./components/ProductList";
 import EditProductPage from "./pages/EditProductPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/create-product" element={<CreateProductPage />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/productId/:id" element={<EditProductPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </>
   );
