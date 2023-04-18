@@ -1,27 +1,15 @@
 import Product from "../../src/model/product.js";
 import { getProductFromId } from "../../src/util/get-product-by-id.js";
 
-export const displayProducts = (req, res) => {
-  const title = "Egg Plant";
-  const price = "12.99";
-
-  res.status(400).send(`<h1> ${title} </h1> <p> ${price} </p>`);
-  //   this should display all products
-};
-
 export const getProduct = async (req, res) => {
   const productId = req.params.id;
-  console.log(productId);
 
   const results = await getProductFromId(productId);
-  console.log(results);
 
   res.send(results);
 };
 
 export const addProduct = (req, res) => {
-  console.log("req.body", req.body);
-
   const title = req.body.productName;
   const imageUrl = req.body.productImgUrl;
   const price = req.body.productPrice;
@@ -38,7 +26,18 @@ export const addProduct = (req, res) => {
 
   // function to save data to backend
   //   This should have a form attached to it
-  res.status(400);
+  res.redirect("http://localhost:5173/create-product");
+};
+
+export const deleteProduct = async (req, res) => {
+  const id = req.body.productId;
+
+  try {
+    await Product.findByIdAndRemove(id);
+    res.redirect("http://localhost:5173/products");
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 export const patchProduct = (req, res) => {
@@ -52,7 +51,6 @@ export const patchProduct = (req, res) => {
 
   //  a few but not all variables is replaced ex. title or price and title but not whole data obj
   //   This should have a form attached to it
-  res.status(400);
 };
 
 export const putProduct = (req, res) => {
@@ -65,14 +63,4 @@ export const putProduct = (req, res) => {
   // function to overwrite existing data obj in backend
   // ex. everything is replaced
   //   This should have a form attached to it
-
-  res.status(400);
-};
-
-export const deleteProduct = (req, res) => {
-  const id = req.body.id;
-
-  // function to delete existing data obj in backend
-  //   This should have a form attached to it
-  res.status(400);
 };

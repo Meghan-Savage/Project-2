@@ -6,6 +6,7 @@ const NavBar = () => {
     <div className="flex bg-lime-500 h-12 items-center justify-start">
       {/* to prop needs to match the endpoint defined in App.js Routes */}
       <CustomLink to="/">Home</CustomLink>
+      <CustomLink to="/products">Product List</CustomLink>
       <CustomLink to="/create-product">Create Product</CustomLink>
     </div>
   );

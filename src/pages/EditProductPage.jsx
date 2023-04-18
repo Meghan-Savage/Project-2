@@ -17,7 +17,7 @@ const EditProductPage = (props) => {
           <ProductDetails id={params.id} />
         </div>
         <div className="flex justify-center m-10">
-          <EditProductForm />
+          <EditProductForm productId={params.id} />
         </div>
       </div>
     </Fragment>

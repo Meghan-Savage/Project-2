@@ -1,7 +1,7 @@
 import React from "react";
 import BlockInput from "../util/BlockInput";
 
-const EditProductForm = () => {
+const EditProductForm = (props) => {
   return (
     <form action="" method="POST">
       <h1>Edit Product</h1>
@@ -24,6 +24,7 @@ const EditProductForm = () => {
         placeholder="Product Image URL"
         name="productImgUrl"
       />
+      <input type="hidden" value={props.productId} name="productId" />
       <button
         className="w-64 m-6 text-white bg-lime-500 hover:bg-lime-600 block"
         type="submit"
