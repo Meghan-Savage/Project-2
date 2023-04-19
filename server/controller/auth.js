@@ -1,8 +1,8 @@
-import User from "../model/User.js";
+import User from "../../src/model/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cookie from "cookie-parser";
-import {createError} from "../utils/error.js"
+import {createError} from "../utils/erros.js"
 
 export const register = async (req, res, next) => {
   try {
