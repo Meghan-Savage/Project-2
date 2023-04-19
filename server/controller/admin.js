@@ -40,6 +40,27 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
+export const editProduct = async (req, res) => {
+  const updateData = {};
+  const id = req.body.productId;
+  const title = req.body.productName;
+  const imageUrl = req.body.productImgUrl;
+  const price = req.body.productPrice;
+  const description = req.body.productDescription;
+
+  if (title) updateData.productName = title;
+  if (imageUrl) updateData.productImgUrl = imageUrl;
+  if (price) updateData.productPrice = price;
+  if (description) updateData.productDescription = description;
+
+  await Product.findByIdAndUpdate(id, updateData, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.redirect(`http://localhost:5173/productId/${id}`);
+};
+
 export const patchProduct = (req, res) => {
   const id = req.body.id;
   const title = req.body.title;

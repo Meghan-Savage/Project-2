@@ -3,7 +3,7 @@ import BlockInput from "../util/BlockInput";
 
 const EditProductForm = (props) => {
   return (
-    <form action="" method="POST">
+    <form action="http://localhost:3000/admin/edit-product" method="POST">
       <h1>Edit Product</h1>
       <BlockInput type="text" placeholder="Product Name" name="productName" />
       <BlockInput
