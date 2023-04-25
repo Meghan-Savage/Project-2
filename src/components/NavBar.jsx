@@ -10,6 +10,8 @@ const NavBar = () => {
         <CustomLink to="/products">PRODUCTS</CustomLink>
         <CustomLink to="/create-product">CREATE PRODUCT</CustomLink>
         <CustomLink to="/locations">MAP</CustomLink>
+        <CustomLink to="/stores">STORES</CustomLink>
+        
       </div>
       <div>
         <CustomLink to="/login">LOGIN</CustomLink>
