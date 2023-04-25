@@ -39,7 +39,21 @@ export default {
       80: "20rem",
       96: "24rem",
     },
-    extend: {},
+    //this is a custom animation
+    extend: {
+      //this describes the timing
+      //the key named slide when applied to a componant use className="animate-slide"
+      animation: {
+        slide: "slide 3s ease-in-out infinite",
+      },
+      //this describes the movement
+      keyframes: {
+        slide: {
+          "0%, 100%": { transform: "translateX(-50%)" },
+          "50%": { transform: "translateX(50%)" },
+        },
+      },
+    },
   },
   plugins: [],
 };

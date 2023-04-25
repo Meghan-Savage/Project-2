@@ -42,7 +42,7 @@ const ProductDetails = (props) => {
                 <input type="hidden" value={props.id} name="productId" />
                 <button
                   type="submit"
-                  className="w-64 m-6 text-white bg-lime-500 hover:bg-lime-600 block"
+                  className="w-64 m-6 text-white bg-green-900 hover:bg-lime-600 block"
                 >
                   delete
                 </button>

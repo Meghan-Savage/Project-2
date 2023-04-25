@@ -8,12 +8,12 @@ const CreateAccountPage = () => {
       <div className="w-full h-36 overflow-hidden">
         <Banner />
       </div>
-      <h1 className="bg-lime-500 text-white">CHECK IT OUT</h1>
+      <h1 className="bg-green-900 text-white">CHECK IT OUT</h1>
       <div className="flex justify-center">
         <CreateAccountForm />
       </div>
       <div className="flex justify-center">
-        <img src="/image 1.png" alt="shopping cart" />
+        <img className="animate-slide" src="/image 1.png" alt="shopping cart" />
       </div>
     </Fragment>
   );

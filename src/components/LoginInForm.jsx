@@ -12,7 +12,7 @@ const LoginInForm = () => {
       <div>
         <button>forgot your password?</button>
         <button
-          className="w-64 m-6 text-white bg-lime-500 hover:bg-lime-600 block"
+          className="w-64 m-6 text-white bg-green-900 hover:bg-lime-600 block"
           type="submit"
         >
           SIGN IN

@@ -88,19 +88,19 @@ const ProductList = () => {
             </div>
             <div>
               <button
-                className="w-full m-2 text-white bg-lime-500 hover:bg-lime-600 block"
+                className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
                 type="submit"
               >
                 Add To Cart
               </button>
               <button
-                className="w-full m-2 text-white bg-lime-500 hover:bg-lime-600 block"
+                className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
                 type="submit"
               >
                 Add To Favorites
               </button>
               <button
-                className="w-full m-2 text-white bg-lime-500 hover:bg-lime-600 block"
+                className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
                 type="button"
                 onClick={() => {
                   return selectedProduct(product._id);
@@ -126,19 +126,19 @@ const ProductList = () => {
             </div>
             <div>
               <button
-                className="w-full m-2 text-white bg-lime-500 hover:bg-lime-600 block"
+                className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
                 type="submit"
               >
                 Add To Cart
               </button>
               <button
-                className="w-full m-2 text-white bg-lime-500 hover:bg-lime-600 block"
+                className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
                 type="submit"
               >
                 Add To Favorites
               </button>
               <button
-                className="w-full m-2 text-white bg-lime-500 hover:bg-lime-600 block"
+                className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
                 type="button"
                 onClick={() => {
                   return selectedProduct(product._id);

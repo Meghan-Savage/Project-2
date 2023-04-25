@@ -3,7 +3,7 @@ import CustomLink from "../util/CustomLink";
 
 const NavBar = () => {
   return (
-    <div className="flex bg-lime-500 h-12 items-center justify-between">
+    <div className="flex bg-green-900 h-12 items-center justify-between">
       {/* to prop needs to match the endpoint defined in App.js Routes */}
       <div>
         <CustomLink to="/">HOME</CustomLink>

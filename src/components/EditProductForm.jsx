@@ -26,7 +26,7 @@ const EditProductForm = (props) => {
       />
       <input type="hidden" value={props.productId} name="productId" />
       <button
-        className="w-64 m-6 text-white bg-lime-500 hover:bg-lime-600 block"
+        className="w-64 m-6 text-white bg-green-900 hover:bg-lime-600 block"
         type="submit"
       >
         Update Product
