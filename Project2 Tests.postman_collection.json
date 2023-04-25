@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "8a55cc78-a8e6-4d57-a669-c6c3222ddc2e",
+		"name": "Project2 Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6212594"
+	},
+	"item": [
+		{
+			"name": "GetStoresInChain",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://grocerytracker.ca/api/stores/:storeBannerId",
+					"protocol": "https",
+					"host": [
+						"grocerytracker",
+						"ca"
+					],
+					"path": [
+						"api",
+						"stores",
+						":storeBannerId"
+					],
+					"variable": [
+						{
+							"key": "storeBannerId",
+							"value": "superstore"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:109.0) Gecko/20100101 Firefox/112.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"LHengen\",\"password\":\"ajfFWmizpLGL4Vx\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://grocerytracker.ca/api/login",
+					"protocol": "https",
+					"host": [
+						"grocerytracker",
+						"ca"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserBasketContents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://grocerytracker.ca/api/baskets/user/:userid ",
+					"protocol": "https",
+					"host": [
+						"grocerytracker",
+						"ca"
+					],
+					"path": [
+						"api",
+						"baskets",
+						"user",
+						":userid "
+					],
+					"variable": [
+						{
+							"key": "userid ",
+							"value": "642b4acb04de3c476301394c"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
