@@ -2,24 +2,26 @@ import express from "express";
 
 // custom controllers
 import {
-  displayProducts,
   putProduct,
   deleteProduct,
   patchProduct,
   addProduct,
+  getProduct,
+  editProduct,
 } from "../controller/admin.js";
 
 const adminRouter = express.Router();
 
-adminRouter.delete("/add-product/delete/:id", deleteProduct);
+adminRouter.get("/get-product/:id", getProduct);
 
-adminRouter.put("/add-product/replace/:id", putProduct);
-
-adminRouter.patch("/add-product/:id", patchProduct);
+adminRouter.post("/delete-product", deleteProduct);
 
 adminRouter.post("/add-product", addProduct);
 
-// data logic stored for access from react router
-adminRouter.get("/add-product", displayProducts);
+adminRouter.post("/edit-product", editProduct);
+
+// adminRouter.put("/add-product/replace/:id", putProduct);
+
+// adminRouter.patch("/add-product/:id", patchProduct);
 
 export default adminRouter;
