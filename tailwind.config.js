@@ -31,6 +31,7 @@ export default {
       40: "10rem",
       44: "11rem",
       48: "12rem",
+      50: "12.5rem",
       52: "13rem",
       56: "14rem",
       60: "15rem",
