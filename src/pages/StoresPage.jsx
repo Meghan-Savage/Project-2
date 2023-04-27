@@ -1,10 +1,10 @@
 import React from "react";
+import LocateSVG from "../components/LocateSVG";
 
 const StoresPage = () => {
   return (
     <div>
-      StoresPage
-      
+        <LocateSVG>Test</LocateSVG>
     </div>
   );
 };
