@@ -4,7 +4,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 const MapBox = () => {
   return (
-    <div>
+    <div className="m-10">
       <Map
         initialViewState={{
           longitude: -114.070847,

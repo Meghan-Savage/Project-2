@@ -4,9 +4,6 @@ import mongoose from "mongoose";
 import cors from "cors";
 import adminRouter from "./routes/admin.js";
 import clientRouter from "./routes/client.js";
-import cookieParser from "cookie-parser";
-import userRoute from "./controller/user.js";
-import authRoute from "./routes/auth.js"
 
 dotenv.config();
 
@@ -20,8 +17,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(clientRouter);
 app.use("/admin", adminRouter);
-app.use("/auth", authRoute);
-app.use("/users", userRoute);
 
 try {
   await mongoose.connect(

@@ -24,7 +24,6 @@ const LoginInForm = () =>{
   return (
     // <form action="" method="POST" onSubmit={handleLogin}>
     <form action="" method="POST">
-      <p>access your account</p>
       <div>
         <BlockInput type="text" placeholder="USERNAME" name="username"
         // value={username} onChange={event => setUsername(event.target.value)}

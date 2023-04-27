@@ -10,6 +10,7 @@ import EditProductPage from "./pages/EditProductPage";
 import LoginPage from "./pages/LoginPage";
 import CreateAccountPage from "./pages/CreateAccountPage";
 import LocationsPage from "./pages/LocationsPage";
+import StoresPage from "./pages/StoresPage";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/locations" element={<LocationsPage />} />
+        <Route path="/stores" element={<StoresPage />} />
       </Routes>
     </>
   );
