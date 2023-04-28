@@ -4,7 +4,6 @@ import BlockInput from "../util/BlockInput";
 const CreateAccountForm = () => {
   return (
     <form action="" method="POST">
-      <p>create your account</p>
       <div>
         <BlockInput type="text" placeholder="USERNAME" name="username" />
         <BlockInput type="email" placeholder="EMAIL" name="email" />

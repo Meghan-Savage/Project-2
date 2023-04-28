@@ -27,7 +27,7 @@ const LoginPage = () => {
           return navigateCreateAccount();
         }}
       >
-        don't have an account <span class="underline">Click Here</span>
+        don't have an account <span className="underline">Click Here</span>
       </button>
     </>
   );

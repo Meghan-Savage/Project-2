@@ -152,11 +152,6 @@ const ProductList = () => {
       })}
     </div>
   );
-
-  // ***************************for mongo api***********************************************
-  // return (
-  //
-  // );
 };
 
 export default ProductList;
