@@ -23,7 +23,7 @@ const LoginInForm = () =>{
 
   return (
     // <form action="" method="POST" onSubmit={handleLogin}>
-    <form action="" method="POST">
+    <form action="http://localhost:3000/login" method="POST">
       <div>
         <BlockInput type="text" placeholder="USERNAME" name="username"
         // value={username} onChange={event => setUsername(event.target.value)}
@@ -41,7 +41,6 @@ const LoginInForm = () =>{
           SIGN IN
         </button>
       </div>
-      {/* {error && <div>{error}</div>} */}
     </form>
   );
 };

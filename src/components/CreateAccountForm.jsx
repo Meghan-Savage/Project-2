@@ -3,7 +3,7 @@ import BlockInput from "../util/BlockInput";
 
 const CreateAccountForm = () => {
   return (
-    <form action="" method="POST">
+    <form action="http://localhost:3000/register" method="POST">
       <div>
         <BlockInput type="text" placeholder="USERNAME" name="username" />
         <BlockInput type="email" placeholder="EMAIL" name="email" />
