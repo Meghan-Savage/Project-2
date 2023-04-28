@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import adminRouter from "./routes/admin.js";
 import clientRouter from "./routes/client.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
