@@ -25,60 +25,79 @@ const FavStores = () => {
   ];
 
   useEffect(() => {
-    // async function ensureStoresAreUnique(stores) {
-    //   const uniqueItems = [];
-    //   stores.forEach((item) => {
-    //     if (
-    //       !uniqueItems.some(
-    //         (uniqueItem) => uniqueItem.storeKey === item.storeKey
-    //       )
-    //     ) {
-    //       uniqueItems.push(item);
-    //     }
-    //   });
-    //   console.log("uniqueItems", uniqueItems);
-    //   return uniqueItems;
-    // }
     async function ensureStoresAreUnique(stores) {
-      var resArr = [];
-      return stores.filter(function (item) {
-        var i = resArr.findIndex((x) => x.storekey == item.storekey);
-        if (i <= -1) {
-          resArr.push(item);
+      const uniqueItems = [];
+      stores.forEach((item) => {
+        if (
+          !uniqueItems.some(
+            (uniqueItem) => uniqueItem.storekey == item.storekey
+          )
+        ) {
+          uniqueItems.push(item);
         }
-        return null;
       });
+      // console.log("uniqueItems", uniqueItems);
+      return uniqueItems;
+    }
+
+    //not sure which one of these methods is best
+    // async function ensureStoresAreUnique(stores) {
+    //   var resArr = [];
+    //   stores.filter(function (item) {
+    //     var i = resArr.findIndex((x) => x.storekey == item.storekey);
+    //     if (i <= -1) {
+    //       resArr.push(item);
+    //     }
+    //     return null;
+    //   });
+    //   return resArr;
+    // }
+
+    async function getStoresForRetailer(retailer) {
+      const results = await axios.get(
+        `https://grocerytracker.ca/api/stores/${retailer}`
+      );
+
+      if (results != undefined) {
+        // console.log("results.data", results.data);
+        //add retailer to each store list so we can reference it later
+
+        // todo - map these elements to a standard store schema object
+        results.data.forEach((element) => {
+          element.retailer = retailer;
+          element.storekey = getStoreKey(element);
+        });
+        return results.data;
+      }
     }
 
     async function fetchData() {
       try {
         let stores = [];
-        // await axios.get("/stores"); //stores saved locally are favourites
+        //todo - get favourite stores from our MongoDB
 
         //get stores for each retailer
-        retailers.map(async  (retailer) => {
-          const results = await axios.get(
-            `https://grocerytracker.ca/api/stores/${retailer}`
-          );
-          if (results != undefined) {
-            // console.log("results.data", results.data);
-            //add retailer to each store list so we can reference it later
-            results.data.forEach((element) => {
-              element.retailer = retailer;
-              element.storekey = getStoreKey(element);
-            });
-            stores = stores.concat(results.data);
+        const nofrills = await getStoresForRetailer("nofrills");
+        console.log("nofrills", nofrills);
+        const saveon = await getStoresForRetailer("saveon");
+        const loblaw = await getStoresForRetailer("loblaw");
+        const wholesaleclub = await getStoresForRetailer("wholesaleclub");
+        const coop = await getStoresForRetailer("coop");
+        const walmart = await getStoresForRetailer("walmart");
+        const superstore = await getStoresForRetailer("superstore");
+        stores = await ensureStoresAreUnique(
+          stores.concat(
+            nofrills,
+            saveon,
+            loblaw,
+            wholesaleclub,
+            coop,
+            walmart,
+            superstore
+          )
+        );
 
-            //todo - only want top 4 or 5 closest stores listed with favorites first
-          }
-          // console.log("data", data);
-        });
         console.log("stores", stores);
-        stores = await ensureStoresAreUnique(stores);
-        console.log("uniquestores", stores);
-
-        // setFaveStoreListData(stores);
-
         //todo - only want top 4 or 5 closest stores listed with favorites first
 
         setFaveStoreListData(stores);
@@ -90,14 +109,7 @@ const FavStores = () => {
     fetchData();
   }, []);
 
-  // function selectedStore(productId) {
-  //   navigate("/productId/" + productId);
-  // }
-
-  // console.log(faveStoreListData);
   function getStoreKey(store) {
-    // return String(store.geoPoint.latitude) + String(store.geoPoint.longitude);
-
     // "nofrills",  //has name, geopoint.latitude/longitude, address.formattedAddress
     // "saveon",  //has siteId (GUID)
     // "loblaw",  //same as nofrills
@@ -107,8 +119,6 @@ const FavStores = () => {
     // "walmart", //id, geoPoint, address.address1
     // "superstore", //id, geoPoint, address.line1
 
-    // console.log('store.storeBannerId', store.storeBannerId)
-    // console.log('store.id', store.id)
     switch (store.retailer) {
       case "nofrills": //dupes - 3947Craig's NOFRILLS Leduc, 3995Jeb's NOFRILLS Beaumont, 3945Chris' NOFRILLS Fort Saskatchewan
         //as storeBannerId, name, address.formattedAddress   -- storeId is not unique if owned by same person
