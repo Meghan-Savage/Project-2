@@ -7,8 +7,7 @@ const CreateAccountForm = () => {
       <div>
         <BlockInput type="text" placeholder="USERNAME" name="username" />
         <BlockInput type="email" placeholder="EMAIL" name="email" />
-        <BlockInput type="tel" placeholder="PHONE NUMBER" name="phoneNumber" />
-        <BlockInput type="text" placeholder="STORE" name="store" />
+        <BlockInput type="text" placeholder="NAME" name="name" />
         <BlockInput type="password" placeholder="PASSWORD" name="password" />
       </div>
       <div>
