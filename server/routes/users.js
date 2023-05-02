@@ -9,4 +9,5 @@ router.delete("/:id", deleteUser)
 router.get("/:id", getUser)
 router.get("/", getUsers)
 
+
 export default router;
