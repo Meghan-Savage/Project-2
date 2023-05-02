@@ -1,20 +1,27 @@
 import mongoose from "mongoose";
+import { ObjectId } from "mongoose";
 
 const storeSchema = mongoose.Schema({
-  Title: { type: String, required: true, unique: true },
-  Details: { type: String, required: true },
-  DateSubmitted: { type: Date, required: true },
-  SubmittedBy: { type: String, required: true },
-  Photo: { type: String, required: false },
-  UserID: { type: mongoose.SchemaTypes.ObjectId, ref: "user" },
+  name: { type: String, required: true },
+  retailer: { type: String, required: true },
+  storeKey: {
+    type: String,
+    required: true,
+    default: new mongoose.Types.ObjectId(),
+  },
+  address: { type: String, required: false },
+  latitude: { type: Number, required: true },
+  longitude: { type: Number, required: true },
+  isFavourite: { type: Boolean, required: true, default: true },
+  // UserID: { type: mongoose.SchemaTypes.ObjectId, ref: "user" },
 });
 
-const store = mongoose.model("store", storeSchema);
+export const store = mongoose.model("store", storeSchema);
 
 export const createStore = async (newStore) => {
   try {
     const createdStore = await store.create(newStore);
-    return createdStore._id;
+    return createdStore;
   } catch (error) {
     if ((error.code = 11000)) {
       throw new Error("Duplicate store ID");

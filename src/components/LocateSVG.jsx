@@ -26,11 +26,10 @@ function LocateSVG() {
 
   return (
     <div>
-      <div>
+      <div className="flex h-12 items-center  justify-between">
         <br />
         <button
           type="button"
-          // value="IP"
           viewBox="0 0 48 48"
           onClick={() => {
             getUserLocationFromIP();
@@ -38,9 +37,7 @@ function LocateSVG() {
         >
           {"IP"}
         </button>
-
-        <br />
-        <br />
+        <div> </div>
         <button
           onClick={() => {
             navigator.geolocation.getCurrentPosition(function (position) {

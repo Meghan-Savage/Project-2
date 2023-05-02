@@ -7,15 +7,15 @@ import {
   updateStore,
   findStoreById,
   listStoresByUserId,
-} from "../models/store.js"; 
+} from "../models/store.js";
 
 const router = express.Router();
 
 router.post("/", async (req, res) => {
   const newStore = req.body;
   try {
-    const id = await createStore(newStore);
-    res.send(`Success, added ${newStore.title} - ${id}`);
+    const createdStore = await createStore(newStore);
+    res.send(`Success, added ${createdStore.name} - ${createdStore.id}`);
   } catch (error) {
     res.status(403).send(error.message);
   }
