@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 function LocateSVG(props) {
   const updateLocation = props.updateLocation; //get callback funciton to update location
