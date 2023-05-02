@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
-function LocateSVG() {
-  const CalgaryLatLong = { Latitude: 51.0501, Longitude: -114.0853 }; //Calgary's General Lat/Long
+function LocateSVG(props) {
+  const updateLocation = props.updateLocation; //get callback funciton to update location
+  console.log("updateLocation", updateLocation);
   const apiURL = "https://ipgeolocation.abstractapi.com/v1/";
   const apiKey = "df635717a4374cf28b49705a8fc81e86";
+  // const [location, setLocation] = useState([]);
+  const navigator = useNavigate();
 
-  const [postalCode, setPostalCode] = useState("");
-  const [LatLong, SetLatLong] = useState(CalgaryLatLong);
+  // const [postalCode, setPostalCode] = useState("");
 
   const getUserLocationFromIP = async () => {
     const fullURL = apiURL + "?api_key=" + apiKey;
@@ -17,8 +20,9 @@ function LocateSVG() {
         Latitude: response.latitude,
         Longitude: response.longitude,
       };
-      SetLatLong(NewLatLong);
-      setPostalCode(response.postal_code);
+      console.log("LatLongFromIP", NewLatLong);
+      updateLocation(NewLatLong);
+      // setPostalCode(response.postal_code);
     } catch (error) {
       console.error(error);
     }
@@ -45,8 +49,8 @@ function LocateSVG() {
                 Latitude: position.coords.latitude,
                 Longitude: position.coords.longitude,
               };
-              console.log("LatLong", NewLatLong);
-              SetLatLong(NewLatLong);
+              console.log("LatLongFromNav", NewLatLong);
+              updateLocation(NewLatLong);
             });
           }}
           color="rebeccapurple"
