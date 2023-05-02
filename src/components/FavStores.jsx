@@ -4,7 +4,9 @@ import axios from "axios";
 import { data } from "autoprefixer";
 
 const FavStores = () => {
-  const [faveStoreListData, setFaveStoreListData] = useState([]);
+  const [favouriteStores, setFavouriteStores] = useState([]);
+  const [closestStores, setClosestStores] = useState([]);
+  const [location, setLocation] = useState([]);
   const navigate = useNavigate();
   const retailers = [
     "nofrills", //has name, geopoint.latitude/longitude, address.formattedAddress
@@ -65,16 +67,32 @@ const FavStores = () => {
         // todo - map these elements to a standard store schema object
         results.data.forEach((element) => {
           element.retailer = retailer;
-          element.storekey = getStoreKey(element);
+          element.storeKey = getStoreKey(element);
+          if (element.isFavourite == undefined) {
+            element.favourite = false;
+          }
         });
+        return results.data;
+      }
+    }
+
+    async function getFavouriteStores() {
+      const results = await axios.get(`http://localhost:3000/store`);
+
+      if (results != undefined) {
+        // console.log("results.data", results.data);
+        //add retailer to each store list so we can reference it later
+
+        // todo - map these elements to a standard store schema object??
+        //for now I have decided to access live store data from grocerytracker the same as we do for Products
         return results.data;
       }
     }
 
     async function fetchData() {
       try {
-        let stores = [];
         //todo - get favourite stores from our MongoDB
+        const faves = await getFavouriteStores();
 
         //get stores for each retailer
         const nofrills = await getStoresForRetailer("nofrills");
@@ -85,22 +103,26 @@ const FavStores = () => {
         const coop = await getStoresForRetailer("coop");
         const walmart = await getStoresForRetailer("walmart");
         const superstore = await getStoresForRetailer("superstore");
-        stores = await ensureStoresAreUnique(
-          stores.concat(
-            nofrills,
-            saveon,
-            loblaw,
-            wholesaleclub,
-            coop,
-            walmart,
-            superstore
-          )
+        let stores = [];
+        stores = stores.concat(
+          faves,
+          nofrills,
+          saveon,
+          loblaw,
+          wholesaleclub,
+          coop,
+          walmart,
+          superstore
         );
+
+        //todo - find 4 or 5 closest stores
+        stores = await ensureStoresAreUnique(stores);
 
         console.log("stores", stores);
         //todo - only want top 4 or 5 closest stores listed with favorites first
 
-        setFaveStoreListData(stores);
+        // setClosestStores(stores);
+        setFavouriteStores(stores);
       } catch (error) {
         console.error(error);
       }
@@ -160,27 +182,43 @@ const FavStores = () => {
     }
   }
 
+  function Store({ store }) {
+    if (store.isFavourite) {
+      return (
+        <>
+          <h1> {store.name} </h1>
+          {/* <p>{store.retailer}</p> */}
+          <p>{store.address}</p>
+          <p>{store.latitude}</p>
+          <p>{store.longitude}</p>
+        </>
+      );
+    }
+    return (
+      <>
+        <h1> {store.name} </h1>
+        <p>{store.storeBannerName}</p>
+        <p>{store.address.formattedAddress}</p>
+        <p>{store.geoPoint.latitude}</p>
+        <p>{store.geoPoint.longitude}</p>
+        <button
+          className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
+          type="submit"
+        >
+          Add To Favorites
+        </button>
+      </>
+    );
+  }
+
   return (
     <div className="flex flex-row flex-wrap justify-center">
-      {console.log("faveStoreListData", faveStoreListData)}
-      {faveStoreListData.map((store) => {
+      {console.log("faveStoreListData", favouriteStores)}
+      {favouriteStores.map((store) => {
         return (
-          <div key={getStoreKey(store)} className="m-4 w-60">
-            <div>
-              <h1> {store.name} </h1>
-              <p>{store.storeBannerName}</p>
-              <p>{store.address.formattedAddress}</p>
-              <p>{store.geoPoint.latitude}</p>
-              <p>{store.geoPoint.longitude}</p>
-            </div>
-            <div>
-              <button
-                className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
-                type="submit"
-              >
-                Add To Favorites
-              </button>
-            </div>
+          <div key={store.storeKey} className="m-4 w-60">
+            <Store store={store} />
+            <div></div>
           </div>
         );
       })}
