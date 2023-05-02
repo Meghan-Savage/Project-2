@@ -1,0 +1,8 @@
+{
+    "name": "Eric's NoFrills",
+    "retailer": "nofrills",
+    "storeKey": "2786782365487426",
+    "address": "100 Rainbow Rd, Chestermere, AB T1X 0V3",
+    "latitude": "51.02608",
+    "longitude": "113.83954"
+}

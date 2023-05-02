@@ -29,7 +29,7 @@ const closestStores = () => {
       stores.forEach((item) => {
         if (
           !uniqueItems.some(
-            (uniqueItem) => uniqueItem.storekey == item.storekey
+            (uniqueItem) => uniqueItem.storeKey == item.storeKey
           )
         ) {
           uniqueItems.push(item);
@@ -96,9 +96,9 @@ const closestStores = () => {
         );
 
         //todo - find 4 or 5 closest stores
+        console.log("stores", stores);
         stores = await ensureStoresAreUnique(stores);
 
-        console.log("stores", stores);
         //todo - only want top 4 or 5 closest stores listed with favorites first
 
         setClosestStores(stores);
