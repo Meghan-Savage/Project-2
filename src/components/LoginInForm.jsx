@@ -6,7 +6,7 @@ import BlockInput from "../util/BlockInput";
 const LoginInForm = () =>{
 
   return (
-    <form action="http://localhost:3000/login" method="POST">
+    <form action="http://localhost:3000/auth/login" method="POST">
       <div>
         <BlockInput type="text" placeholder="USERNAME" name="username" />
         <BlockInput type="password" placeholder="PASSWORD" name="password" />
