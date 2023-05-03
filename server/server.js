@@ -6,6 +6,7 @@ import adminRouter from "./routes/admin.js";
 import clientRouter from "./routes/client.js";
 import cookieParser from "cookie-parser";
 import storeRouter from "./routes/store.js";
+import authRouter from "./routes/auth.js"
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(clientRouter);
 app.use("/admin", adminRouter);
 app.use("/store", storeRouter);
+app.use("/", authRouter);
 
 const connectionString = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.agdr7nu.mongodb.net/?retryWrites=true&w=majority`;
 console.log("connectionString", connectionString);
