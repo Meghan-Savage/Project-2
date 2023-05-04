@@ -13,14 +13,21 @@ const StoresPage = () => {
   function updateLocation(latLong) {
     console.log("lat/long", latLong);
     setLatLong(latLong);
-    setShowFaves(false);  
+    setShowFaves(false);
     setShowClosest(true);
+  }
+
+  function updateFaves() {
+    //shoe surrent favourites (may have been updated)
+    setShowFaves(true);
+    setShowClosest(false);
   }
 
   console.log("location", showClosest);
   return (
     <div>
-      <LocateSVG showFaves={showFaves} updateLocation={updateLocation} />
+      <LocateSVG updateFaves={updateFaves} updateLocation={updateLocation} />
+      
       {showFaves && <FavStores />}
       {showClosest && <ClosestStores LatLong={LatLong} />}
     </div>

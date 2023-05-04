@@ -110,7 +110,7 @@ const closestStores = () => {
     fetchData();
   }, []);
 
-  function getStoreKey(store) {
+  function getStoreKey(aStore) {
     // "nofrills",  //has name, geopoint.latitude/longitude, address.formattedAddress
     // "saveon",  //has siteId (GUID)
     // "loblaw",  //same as nofrills
@@ -120,44 +120,129 @@ const closestStores = () => {
     // "walmart", //id, geoPoint, address.address1
     // "superstore", //id, geoPoint, address.line1
 
-    switch (store.retailer) {
+    switch (aStore.retailer) {
       case "nofrills": //dupes - 3947Craig's NOFRILLS Leduc, 3995Jeb's NOFRILLS Beaumont, 3945Chris' NOFRILLS Fort Saskatchewan
         //as storeBannerId, name, address.formattedAddress   -- storeId is not unique if owned by same person
-        return store.retailer + store.storeId + store.name;
+        return aStore.retailer + aStore.storeId + aStore.name;
 
       case "saveon":
-        return store.retailer + store.siteId + store.addressLine1;
+        return aStore.retailer + aStore.siteId + aStore.addressLine1;
 
       case "loblaw":
-        return store.retailer + store.storeId + store.name;
+        return aStore.retailer + aStore.storeId + aStore.name;
 
       case "wholesaleclub":
-        return store.retailer + store.storeId + store.name;
+        return aStore.retailer + aStore.storeId + aStore.name;
 
       case "voila": //only 2 records in the database!
         return (
-          store.retailer +
-          String(store.geoPoint.Latitude) +
+          aStore.retailer +
+          String(aStore.geoPoint.Latitude) +
           " " +
-          String(store.geoPoint.Latitude)
+          String(aStore.geoPoint.Latitude)
         );
 
       case "coop":
-        return store.retailer + store.id;
+        return aStore.retailer + aStore.id;
 
       case "walmart":
-        return store.retailer + store.id;
+        return aStore.retailer + aStore.id;
 
       case "superstore": //dupes ec1b18a0-1634-4368-82ce-22f1e891f3cb with store.id
         return (
-          store.retailer +
-          String(store.geoPoint.Latitude) +
+          aStore.retailer +
+          String(aStore.geoPoint.Latitude) +
           " " +
-          String(store.geoPoint.Latitude)
+          String(aStore.geoPoint.Latitude)
         );
 
       default:
-        throw new Error("unknown retailer of " + store.retailer);
+        throw new Error("unknown retailer of " + aStore.retailer);
+    }
+  }
+
+  async function saveStoreToFaves(aStore) {
+    //create a post to our endpoint to save the store as a favourite
+
+    var bodyFormData = new FormData();
+    // "nofrills",  //has name, geopoint.latitude/longitude, address.formattedAddress
+    // "saveon",  //has siteId (GUID)
+    // "loblaw",  //same as nofrills
+    // "wholesaleclub", //same as nofrills
+    // "voila", //address.geoPoint is only option
+    // "coop",  //has id (GUID)
+    // "walmart", //id, geoPoint, address.address1
+    // "superstore", //id, geoPoint, address.line1
+
+    console.log("aStore", aStore);
+    let newStore = {};
+    switch (aStore.retailer) {
+      case "nofrills":
+      case "loblaw":
+      case "saveon":
+      case "wholesaleclub": //dupes - 3947Craig's NOFRILLS Leduc, 3995Jeb's NOFRILLS Beaumont, 3945Chris' NOFRILLS Fort Saskatchewan
+        newStore.name = aStore.name;
+        newStore.retailer = aStore.retailer;
+        newStore.storeKey = aStore.storeKey;
+        newStore.address = aStore.address.formattedAddress;
+        newStore.latitude = aStore.geoPoint.latitude;
+        newStore.longitude = aStore.geoPoint.longitude;
+
+        console.log("newStore", newStore);
+        const response = await axios.post(
+          "http://localhost:3000/store",
+          newStore
+        );
+
+        break;
+
+      case "voila": //only 2 records in the database!
+        break;
+
+      case "coop":
+        newStore.name = aStore.name;
+        newStore.retailer = aStore.retailer;
+        newStore.storeKey = aStore.storeKey;
+        newStore.address = aStore.address.formattedAddress;
+        newStore.latitude = aStore.geoPoint.latitude;
+        newStore.longitude = aStore.geoPoint.longitude;
+        console.log("newStore", newStore);
+        const response1 = await axios.post(
+          "http://localhost:3000/store",
+          newStore
+        );
+        break;
+
+      case "walmart":
+        newStore.name = aStore.name;
+        newStore.retailer = aStore.retailer;
+        newStore.storeKey = aStore.storeKey;
+        newStore.address = aStore.address.formattedAddress;
+        newStore.latitude = aStore.geoPoint.latitude;
+        newStore.longitude = aStore.geoPoint.longitude;
+        console.log("newStore", newStore);
+        const response2 = await axios.post(
+          "http://localhost:3000/store",
+          newStore
+        );
+        break;
+
+      case "superstore": //dupes ec1b18a0-1634-4368-82ce-22f1e891f3cb with store.id
+        newStore.name = aStore.name;
+        newStore.retailer = aStore.retailer;
+        newStore.storeKey = aStore.storeKey;
+        newStore.address = aStore.address.formattedAddress;
+        newStore.latitude = aStore.geoPoint.latitude;
+        newStore.longitude = aStore.geoPoint.longitude;
+        console.log("newStore", newStore);
+        const response3 = await axios.post(
+          "http://localhost:3000/store",
+          newStore
+        );
+        break;
+
+      default:
+        throw new Error("unknown retailer of " + aStore.retailer);
     }
   }
 
@@ -172,6 +257,9 @@ const closestStores = () => {
         <button
           className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
           type="submit"
+          onClick={() => {
+            saveStoreToFaves(store);
+          }}
         >
           Add To Favorites
         </button>
@@ -180,17 +268,24 @@ const closestStores = () => {
   }
 
   return (
-    <div className="flex flex-row flex-wrap justify-center">
-      {console.log("ClosestStores", closestStores)}
-      {closestStores.map((store) => {
-        return (
-          <div key={store.storeKey} className="m-4 w-60">
-            <Store store={store} />
-            <div></div>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <div className="flex flex-row flex-wrap justify-left">
+        <h1>
+          <b>Closest Stores</b>{" "}
+        </h1>
+      </div>
+      <div className="flex flex-row flex-wrap justify-left">
+        {console.log("ClosestStores", closestStores)}
+        {closestStores.map((store) => {
+          return (
+            <div key={store.storeKey} className="m-4 w-60">
+              <Store store={store} />
+              <div></div>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 

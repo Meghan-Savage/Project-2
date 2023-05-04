@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 import { ObjectId } from "mongoose";
 
 const storeSchema = mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   retailer: { type: String, required: true },
   storeKey: {
     type: String,
     required: true,
     default: new mongoose.Types.ObjectId(),
   },
-  address: { type: String, required: false },
+  address: { type: String, required: false, unique: true },
   latitude: { type: Number, required: true },
   longitude: { type: Number, required: true },
   isFavourite: { type: Boolean, required: true, default: true },

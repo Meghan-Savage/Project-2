@@ -36,32 +36,37 @@ const FavStores = () => {
 
   function Store({ store }) {
     return (
-      <>
+      <div class="h-60">
         <h1> {store.name} </h1>
         {/* <p>{store.retailer}</p> */}
         <p>{store.address}</p>
         <p>{store.latitude}</p>
         <p>{store.longitude}</p>
-      </>
+      </div>
     );
   }
 
   return (
-    <div className="flex flex-row flex-wrap justify-left">
-      <h1 className="flex justify-center">Favourite Stores </h1>
-      {console.log("faveStoreListData", favouriteStores)}
-      <div className="m-4 w-60">
-        <br />
-        {favouriteStores.map((store) => {
-          return (
-            <div key={store.storeKey} className="m-4 w-60">
-              <Store store={store} />
-              <div></div>
-            </div>
-          );
-        })}
+    <>
+      <div className="flex flex-row flex-wrap justify-left">
+        <h1>
+          <b>Favourite Stores</b>{" "}
+        </h1>
       </div>
-    </div>
+      <div className="flex flex-row flex-wrap justify-center">
+        {console.log("faveStoreListData", favouriteStores)}
+
+          <br />
+          {favouriteStores.map((store) => {
+            return (
+              <div key={store.storeKey} className="m-4 w-60">
+                <Store store={store} />
+              </div>
+            );
+          })}
+
+      </div>
+    </>
   );
 };
 

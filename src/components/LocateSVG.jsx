@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 function LocateSVG(props) {
   const updateLocation = props.updateLocation; //get callback funciton to update location
+  const updateFaves = props.updateFaves;
+
   console.log("updateLocation", updateLocation);
   const apiURL = "https://ipgeolocation.abstractapi.com/v1/";
   const apiKey = "df635717a4374cf28b49705a8fc81e86";
@@ -32,17 +34,41 @@ function LocateSVG(props) {
     <div>
       <div className="flex h-12 items-center  justify-between">
         <br />
+        <input
+          type="image"
+          title="Show Favourite Stores"
+          src="https:/realtor.ca/images/common/icons/svg/heart.svg"
+          style={{ height: 30, width: 30 }}
+          onClick={() => {
+            console.log("calling updateFaves");
+            updateFaves();
+          }}
+        />
+
         <button
           type="button"
-          viewBox="0 0 48 48"
-          onClick={() => {
-            getUserLocationFromIP();
-          }}
+          title="Show Stores Closest to Your Location"
+          class="btn btn-secondary"
         >
-          {"IP"}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 18 18"
+            width="30"
+            height="30"
+            fill="currentColor"
+            class="iconButton"
+            onClick={() => {
+              getUserLocationFromIP();
+            }}
+          >
+            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"></path>
+          </svg>
         </button>
-        <div> </div>
+
         <button
+          type="button"
+          title="Show Stores Closest to Your Location"
+          class="btn btn-secondary"
           onClick={() => {
             navigator.geolocation.getCurrentPosition(function (position) {
               const NewLatLong = {
@@ -55,12 +81,22 @@ function LocateSVG(props) {
           }}
           color="rebeccapurple"
         >
-          {"Nav"}
-          <svg viewBox="0 0 48 48" className="css-v6j1qa eu14tha6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 18 18"
+            width="30"
+            height="30"
+            fill="currentColor"
+            class="iconButton"
+            onClick={() => {
+              getUserLocationFromIP();
+            }}
+          >
             <path d="M46 22h-4.12A18 18 0 0 0 26 6.12V2a2 2 0 0 0-4 0v4.12A18 18 0 0 0 6.12 22H2a2 2 0 0 0 0 4h4.12A18 18 0 0 0 22 41.88V46a2 2 0 0 0 4 0v-4.12A18 18 0 0 0 41.88 26H46a2 2 0 0 0 0-4zM24 38a14 14 0 1 1 14-14 14 14 0 0 1-14 14z"></path>
-            <circle cx="24" cy="24" r="4"></circle>
+            <circle cx="15" cy="15" r="1"></circle>
           </svg>
         </button>
+        <div> </div>
       </div>
     </div>
   );
