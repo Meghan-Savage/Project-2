@@ -8,23 +8,19 @@ function LocateSVG(props) {
   console.log("updateLocation", updateLocation);
   const apiURL = "https://ipgeolocation.abstractapi.com/v1/";
   const apiKey = "df635717a4374cf28b49705a8fc81e86";
-  // const [location, setLocation] = useState([]);
   const navigator = useNavigate();
-
-  // const [postalCode, setPostalCode] = useState("");
 
   const getUserLocationFromIP = async () => {
     const fullURL = apiURL + "?api_key=" + apiKey;
     try {
       console.log("getting location from IP " + fullURL);
       const response = await (await fetch(fullURL)).json(); //get data and convert JSON to an Object
-      const NewLatLong = {
-        Latitude: response.latitude,
-        Longitude: response.longitude,
+      const newLatLong = {
+        latitude: response.latitude,
+        longitude: response.longitude,
       };
-      console.log("LatLongFromIP", NewLatLong);
-      updateLocation(NewLatLong);
-      // setPostalCode(response.postal_code);
+      console.log("LatLongFromIP", newLatLong);
+      updateLocation(newLatLong);
     } catch (error) {
       console.error(error);
     }
@@ -48,7 +44,7 @@ function LocateSVG(props) {
         <button
           type="button"
           title="Show Stores Closest to Your Location"
-          class="btn btn-secondary"
+          className="btn btn-secondary"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +52,7 @@ function LocateSVG(props) {
             width="30"
             height="30"
             fill="currentColor"
-            class="iconButton"
+            className="iconButton"
             onClick={() => {
               getUserLocationFromIP();
             }}
@@ -68,15 +64,15 @@ function LocateSVG(props) {
         <button
           type="button"
           title="Show Stores Closest to Your Location"
-          class="btn btn-secondary"
+          className="btn btn-secondary"
           onClick={() => {
             navigator.geolocation.getCurrentPosition(function (position) {
-              const NewLatLong = {
-                Latitude: position.coords.latitude,
-                Longitude: position.coords.longitude,
+              const newLatLong = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
               };
-              console.log("LatLongFromNav", NewLatLong);
-              updateLocation(NewLatLong);
+              console.log("LatLongFromNav", newLatLong);
+              updateLocation(newLatLong);
             });
           }}
           color="rebeccapurple"
@@ -87,7 +83,7 @@ function LocateSVG(props) {
             width="30"
             height="30"
             fill="currentColor"
-            class="iconButton"
+            className="iconButton"
             onClick={() => {
               getUserLocationFromIP();
             }}

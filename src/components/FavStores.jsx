@@ -36,7 +36,7 @@ const FavStores = () => {
 
   function Store({ store }) {
     return (
-      <div class="h-60">
+      <div className="h-60">
         <h1> {store.name} </h1>
         {/* <p>{store.retailer}</p> */}
         <p>{store.address}</p>
@@ -56,15 +56,14 @@ const FavStores = () => {
       <div className="flex flex-row flex-wrap justify-center">
         {console.log("faveStoreListData", favouriteStores)}
 
-          <br />
-          {favouriteStores.map((store) => {
-            return (
-              <div key={store.storeKey} className="m-4 w-60">
-                <Store store={store} />
-              </div>
-            );
-          })}
-
+        <br />
+        {favouriteStores.map((store) => {
+          return (
+            <div key={store.storeKey} className="m-4 w-60">
+              <Store store={store} />
+            </div>
+          );
+        })}
       </div>
     </>
   );

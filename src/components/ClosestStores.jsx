@@ -2,8 +2,12 @@ import React, { useState, useEffect, input, cloneElement } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { data } from "autoprefixer";
+import haversine from "haversine";
 
-const closestStores = () => {
+const closestStores = (props) => {
+  const userLocation = props.userLocation;
+  console.log("userLocation", userLocation);
+
   const [closestStores, setClosestStores] = useState([]);
   const retailers = [
     "nofrills", //has name, geopoint.latitude/longitude, address.formattedAddress
@@ -95,13 +99,14 @@ const closestStores = () => {
           superstore
         );
 
-        //todo - find 4 or 5 closest stores
-        console.log("stores", stores);
         stores = await ensureStoresAreUnique(stores);
+        stores.sort(function (a, b) {
+          return a.distanceFromUser - b.distanceFromUser;
+        });
+        console.log("stores sorted by distance", stores);
 
-        //todo - only want top 4 or 5 closest stores listed with favorites first
-
-        setClosestStores(stores);
+        //return 5 closest stores
+        setClosestStores(stores.slice(0, 5));
       } catch (error) {
         console.error(error);
       }
@@ -121,20 +126,31 @@ const closestStores = () => {
     // "superstore", //id, geoPoint, address.line1
 
     switch (aStore.retailer) {
-      case "nofrills": //dupes - 3947Craig's NOFRILLS Leduc, 3995Jeb's NOFRILLS Beaumont, 3945Chris' NOFRILLS Fort Saskatchewan
-        //as storeBannerId, name, address.formattedAddress   -- storeId is not unique if owned by same person
-        return aStore.retailer + aStore.storeId + aStore.name;
-
-      case "saveon":
-        return aStore.retailer + aStore.siteId + aStore.addressLine1;
-
+      case "nofrills":
       case "loblaw":
+      case "saveon":
+      case "wholesaleclub": //dupes - 3947Craig's NOFRILLS Leduc, 3995Jeb's NOFRILLS Beaumont, 3945Chris' NOFRILLS Fort Saskatchewan
+        aStore.distanceFromUser = haversine(userLocation, aStore.geoPoint, {
+          unit: "meter",
+        });
+        console.log(aStore.distanceFromUser);
+
+        //has storeBannerId, name, address.formattedAddress   -- storeId is not unique if owned by same person
         return aStore.retailer + aStore.storeId + aStore.name;
 
-      case "wholesaleclub":
-        return aStore.retailer + aStore.storeId + aStore.name;
+      // case "saveon":
+      //   return aStore.retailer + aStore.siteId + aStore.addressLine1;
+
+      // case "loblaw":
+      //   return aStore.retailer + aStore.storeId + aStore.name;
+
+      // case "wholesaleclub":
+      //   return aStore.retailer + aStore.storeId + aStore.name;
 
       case "voila": //only 2 records in the database!
+        aStore.distanceFromUser = console.log(
+          haversine(userLocation, aStore.geoPoint, { unit: "meter" })
+        );
         return (
           aStore.retailer +
           String(aStore.geoPoint.Latitude) +
@@ -143,12 +159,21 @@ const closestStores = () => {
         );
 
       case "coop":
+        aStore.distanceFromUser = console.log(
+          haversine(userLocation, aStore.geoPoint, { unit: "meter" })
+        );
         return aStore.retailer + aStore.id;
 
       case "walmart":
+        aStore.distanceFromUser = console.log(
+          haversine(userLocation, aStore.geoPoint, { unit: "meter" })
+        );
         return aStore.retailer + aStore.id;
 
       case "superstore": //dupes ec1b18a0-1634-4368-82ce-22f1e891f3cb with store.id
+        aStore.distanceFromUser = console.log(
+          haversine(userLocation, aStore.geoPoint, { unit: "meter" })
+        );
         return (
           aStore.retailer +
           String(aStore.geoPoint.Latitude) +
