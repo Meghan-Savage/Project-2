@@ -34,6 +34,16 @@ const FavStores = () => {
     fetchData();
   }, []);
 
+  async function removeFromFavourites(aStore) {
+    console.log("Store To Delete from Favourites", aStore);
+    //remove from database
+    const response = await axios.delete(
+      `http://localhost:3000/store/${aStore._id}`
+    );
+    //remove the store from the list amdf trigger a refresh
+    setFavouriteStores(favouriteStores.filter((item) => item !== aStore));
+  }
+
   function Store({ store }) {
     return (
       <div className="h-60">
@@ -42,6 +52,15 @@ const FavStores = () => {
         <p>{store.address}</p>
         <p>{store.latitude}</p>
         <p>{store.longitude}</p>
+        <button
+          className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
+          type="submit"
+          onClick={() => {
+            removeFromFavourites(store);
+          }}
+        >
+          Remove From Favorites
+        </button>
       </div>
     );
   }

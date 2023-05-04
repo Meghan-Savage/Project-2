@@ -189,7 +189,6 @@ const closestStores = (props) => {
   async function saveStoreToFaves(aStore) {
     //create a post to our endpoint to save the store as a favourite
 
-    var bodyFormData = new FormData();
     // "nofrills",  //has name, geopoint.latitude/longitude, address.formattedAddress
     // "saveon",  //has siteId (GUID)
     // "loblaw",  //same as nofrills
