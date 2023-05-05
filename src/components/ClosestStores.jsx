@@ -229,10 +229,10 @@ const closestStores = (props) => {
         break;
 
       case "walmart":
-        newStore.name = aStore.name;
+        newStore.name = aStore.storeBannerName;
         newStore.retailer = aStore.retailer;
         newStore.storeKey = aStore.storeKey;
-        newStore.address = aStore.address.formattedAddress;
+        newStore.address = aStore.address.address1;
         newStore.latitude = aStore.geoPoint.latitude;
         newStore.longitude = aStore.geoPoint.longitude;
         // console.log("newStore", newStore);
@@ -267,6 +267,7 @@ const closestStores = (props) => {
         <h1> {store.name} </h1>
         <p>{store.storeBannerName}</p>
         <p>{store.address.formattedAddress}</p>
+        <p>{Math.trunc(store.distanceFromUser)} metres away</p>
         {/* <p>{store.geoPoint.latitude}</p> */}
         {/* <p>{store.geoPoint.longitude}</p> */}
         <button
