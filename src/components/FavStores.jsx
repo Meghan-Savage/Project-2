@@ -50,8 +50,8 @@ const FavStores = () => {
         <h1> {store.name} </h1>
         {/* <p>{store.retailer}</p> */}
         <p>{store.address}</p>
-        <p>{store.latitude}</p>
-        <p>{store.longitude}</p>
+        {/* <p>{store.latitude}</p> */}
+        {/* <p>{store.longitude}</p> */}
         <button
           className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
           type="submit"

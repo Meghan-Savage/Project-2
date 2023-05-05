@@ -81,7 +81,7 @@ const closestStores = (props) => {
       try {
         //get stores for each retailer
         const nofrills = await getStoresForRetailer("nofrills");
-        console.log("nofrills", nofrills);
+        // console.log("nofrills", nofrills);
         const saveon = await getStoresForRetailer("saveon");
         const loblaw = await getStoresForRetailer("loblaw");
         const wholesaleclub = await getStoresForRetailer("wholesaleclub");
@@ -103,7 +103,7 @@ const closestStores = (props) => {
         stores.sort(function (a, b) {
           return a.distanceFromUser - b.distanceFromUser;
         });
-        console.log("stores sorted by distance", stores);
+        // console.log("stores sorted by distance", stores);
 
         //return 5 closest stores
         setClosestStores(stores.slice(0, 5));
@@ -133,24 +133,15 @@ const closestStores = (props) => {
         aStore.distanceFromUser = haversine(userLocation, aStore.geoPoint, {
           unit: "meter",
         });
-        console.log(aStore.distanceFromUser);
+        // console.log(aStore.distanceFromUser);
 
         //has storeBannerId, name, address.formattedAddress   -- storeId is not unique if owned by same person
         return aStore.retailer + aStore.storeId + aStore.name;
 
-      // case "saveon":
-      //   return aStore.retailer + aStore.siteId + aStore.addressLine1;
-
-      // case "loblaw":
-      //   return aStore.retailer + aStore.storeId + aStore.name;
-
-      // case "wholesaleclub":
-      //   return aStore.retailer + aStore.storeId + aStore.name;
-
       case "voila": //only 2 records in the database!
-        aStore.distanceFromUser = console.log(
-          haversine(userLocation, aStore.geoPoint, { unit: "meter" })
-        );
+        aStore.distanceFromUser = haversine(userLocation, aStore.geoPoint, {
+          unit: "meter",
+        });
         return (
           aStore.retailer +
           String(aStore.geoPoint.Latitude) +
@@ -159,21 +150,21 @@ const closestStores = (props) => {
         );
 
       case "coop":
-        aStore.distanceFromUser = console.log(
-          haversine(userLocation, aStore.geoPoint, { unit: "meter" })
-        );
+        aStore.distanceFromUser = haversine(userLocation, aStore.geoPoint, {
+          unit: "meter",
+        });
         return aStore.retailer + aStore.id;
 
       case "walmart":
-        aStore.distanceFromUser = console.log(
-          haversine(userLocation, aStore.geoPoint, { unit: "meter" })
-        );
+        aStore.distanceFromUser = haversine(userLocation, aStore.geoPoint, {
+          unit: "meter",
+        });
         return aStore.retailer + aStore.id;
 
       case "superstore": //dupes ec1b18a0-1634-4368-82ce-22f1e891f3cb with store.id
-        aStore.distanceFromUser = console.log(
-          haversine(userLocation, aStore.geoPoint, { unit: "meter" })
-        );
+        aStore.distanceFromUser = haversine(userLocation, aStore.geoPoint, {
+          unit: "meter",
+        });
         return (
           aStore.retailer +
           String(aStore.geoPoint.Latitude) +
@@ -198,7 +189,7 @@ const closestStores = (props) => {
     // "walmart", //id, geoPoint, address.address1
     // "superstore", //id, geoPoint, address.line1
 
-    console.log("aStore", aStore);
+    // console.log("aStore", aStore);
     let newStore = {};
     switch (aStore.retailer) {
       case "nofrills":
@@ -212,7 +203,7 @@ const closestStores = (props) => {
         newStore.latitude = aStore.geoPoint.latitude;
         newStore.longitude = aStore.geoPoint.longitude;
 
-        console.log("newStore", newStore);
+        // console.log("newStore", newStore);
         const response = await axios.post(
           "http://localhost:3000/store",
           newStore
@@ -230,7 +221,7 @@ const closestStores = (props) => {
         newStore.address = aStore.address.formattedAddress;
         newStore.latitude = aStore.geoPoint.latitude;
         newStore.longitude = aStore.geoPoint.longitude;
-        console.log("newStore", newStore);
+        // console.log("newStore", newStore);
         const response1 = await axios.post(
           "http://localhost:3000/store",
           newStore
@@ -244,7 +235,7 @@ const closestStores = (props) => {
         newStore.address = aStore.address.formattedAddress;
         newStore.latitude = aStore.geoPoint.latitude;
         newStore.longitude = aStore.geoPoint.longitude;
-        console.log("newStore", newStore);
+        // console.log("newStore", newStore);
         const response2 = await axios.post(
           "http://localhost:3000/store",
           newStore
@@ -258,7 +249,7 @@ const closestStores = (props) => {
         newStore.address = aStore.address.formattedAddress;
         newStore.latitude = aStore.geoPoint.latitude;
         newStore.longitude = aStore.geoPoint.longitude;
-        console.log("newStore", newStore);
+        // console.log("newStore", newStore);
         const response3 = await axios.post(
           "http://localhost:3000/store",
           newStore
@@ -276,8 +267,8 @@ const closestStores = (props) => {
         <h1> {store.name} </h1>
         <p>{store.storeBannerName}</p>
         <p>{store.address.formattedAddress}</p>
-        <p>{store.geoPoint.latitude}</p>
-        <p>{store.geoPoint.longitude}</p>
+        {/* <p>{store.geoPoint.latitude}</p> */}
+        {/* <p>{store.geoPoint.longitude}</p> */}
         <button
           className="w-full m-2 text-white bg-green-900 hover:bg-lime-600 block"
           type="submit"
@@ -299,7 +290,7 @@ const closestStores = (props) => {
         </h1>
       </div>
       <div className="flex flex-row flex-wrap justify-left">
-        {console.log("ClosestStores", closestStores)}
+        {/* {console.log("ClosestStores", closestStores)} */}
         {closestStores.map((store) => {
           return (
             <div key={store.storeKey} className="m-4 w-60">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function LocateSVG(props) {
   const updateLocation = props.updateLocation; //get callback funciton to update location
@@ -8,7 +8,7 @@ function LocateSVG(props) {
   console.log("updateLocation", updateLocation);
   const apiURL = "https://ipgeolocation.abstractapi.com/v1/";
   const apiKey = "df635717a4374cf28b49705a8fc81e86";
-  const navigator = useNavigate();
+  // const navigator = useNavigate();
 
   const getUserLocationFromIP = async () => {
     const fullURL = apiURL + "?api_key=" + apiKey;
@@ -19,7 +19,7 @@ function LocateSVG(props) {
         latitude: response.latitude,
         longitude: response.longitude,
       };
-      console.log("LatLongFromIP", newLatLong);
+      // console.log("LatLongFromIP", newLatLong);
       updateLocation(newLatLong);
     } catch (error) {
       console.error(error);
@@ -43,7 +43,7 @@ function LocateSVG(props) {
 
         <button
           type="button"
-          title="Show Stores Closest to Your Location"
+          title="Use IP to Show Closest Stores"
           className="btn btn-secondary"
         >
           <svg
@@ -63,7 +63,7 @@ function LocateSVG(props) {
 
         <button
           type="button"
-          title="Show Stores Closest to Your Location"
+          title="Use Nav to Show Closest Stores"
           className="btn btn-secondary"
           onClick={() => {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -71,7 +71,7 @@ function LocateSVG(props) {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
               };
-              console.log("LatLongFromNav", newLatLong);
+              // console.log("LatLongFromNav", newLatLong);
               updateLocation(newLatLong);
             });
           }}
@@ -84,9 +84,9 @@ function LocateSVG(props) {
             height="30"
             fill="currentColor"
             className="iconButton"
-            onClick={() => {
-              getUserLocationFromIP();
-            }}
+            // onClick={() => {
+            //   getUserLocationFromIP();
+            // }}
           >
             <path d="M46 22h-4.12A18 18 0 0 0 26 6.12V2a2 2 0 0 0-4 0v4.12A18 18 0 0 0 6.12 22H2a2 2 0 0 0 0 4h4.12A18 18 0 0 0 22 41.88V46a2 2 0 0 0 4 0v-4.12A18 18 0 0 0 41.88 26H46a2 2 0 0 0 0-4zM24 38a14 14 0 1 1 14-14 14 14 0 0 1-14 14z"></path>
             <circle cx="15" cy="15" r="1"></circle>
